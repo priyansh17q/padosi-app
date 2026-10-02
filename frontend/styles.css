@@ -1,0 +1,146 @@
+/* ============ Padosi Pro — Base & Design System ============ */
+* { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+html, body { margin: 0; padding: 0; width: 100%; overscroll-behavior: none; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: #0a0f1e;
+  color: #0b1c30;
+  min-height: 100vh;
+}
+::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+#app { max-width: 430px; margin: 0 auto; min-height: 100vh; position: relative; background: #f8f9ff; box-shadow: 0 0 60px rgba(0,0,0,.45); overflow-x: hidden; }
+
+/* ============ Page transitions ============ */
+.page { display: none; animation: none; }
+.page.active { display: block; }
+.page.enter-right { animation: pageInRight .38s cubic-bezier(.22,1,.36,1) both; }
+.page.enter-left  { animation: pageInLeft  .38s cubic-bezier(.22,1,.36,1) both; }
+.page.enter-fade  { animation: pageInFade  .35s ease both; }
+.page.exiting { animation: pageOut .22s ease both; }
+@keyframes pageInRight { from { opacity: 0; transform: translateX(46px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes pageInLeft  { from { opacity: 0; transform: translateX(-46px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes pageInFade  { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes pageOut     { from { opacity: 1; } to { opacity: 0; transform: translateY(-10px); } }
+
+/* ============ Staggered card entrance ============ */
+.stagger > * { opacity: 0; transform: translateY(18px); animation: cardIn .5s cubic-bezier(.22,1,.36,1) forwards; }
+.stagger > *:nth-child(1) { animation-delay: .04s; }
+.stagger > *:nth-child(2) { animation-delay: .1s; }
+.stagger > *:nth-child(3) { animation-delay: .16s; }
+.stagger > *:nth-child(4) { animation-delay: .22s; }
+.stagger > *:nth-child(5) { animation-delay: .28s; }
+.stagger > *:nth-child(6) { animation-delay: .34s; }
+@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+/* ============ Micro-interactions ============ */
+.pressable { transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, background .25s ease, opacity .25s ease; }
+.pressable:active { transform: scale(.95); }
+.hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(11,28,48,.1); }
+
+.ripple { position: relative; overflow: hidden; }
+.ripple .ripple-ink {
+  position: absolute; border-radius: 50%; transform: scale(0); pointer-events: none;
+  background: rgba(255,255,255,.35); animation: rippleAnim .55s ease-out forwards;
+}
+.ripple-dark .ripple-ink { background: rgba(0,105,72,.18); }
+@keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+/* Mode toggle pill slide */
+#mode-slider { transition: transform .38s cubic-bezier(.22,1,.36,1); }
+
+/* Proximity ping */
+.ping-dot { position: relative; }
+.ping-dot::after {
+  content: ''; position: absolute; inset: 0; border-radius: 9999px;
+  background: #006948; animation: pingRing 1.6s cubic-bezier(0,0,.2,1) infinite;
+}
+@keyframes pingRing { 0% { transform: scale(1); opacity: .7; } 80%,100% { transform: scale(2.4); opacity: 0; } }
+
+/* Runner pin bounce on map */
+.runner-pin { animation: pinBounce 1.8s ease-in-out infinite; }
+@keyframes pinBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+.radar-ring {
+  position: absolute; border-radius: 9999px; border: 2px solid rgba(0,105,72,.45);
+  animation: radar 2.4s ease-out infinite;
+}
+@keyframes radar { from { transform: scale(.35); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
+
+/* Stepper progress fill */
+#stepper-fill { transition: width 1s cubic-bezier(.22,1,.36,1); }
+
+/* Toast */
+#toast { transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .35s ease; }
+#toast.show { transform: translateY(0) !important; opacity: 1 !important; pointer-events: auto !important; }
+
+/* Bottom sheet */
+#counter-sheet { transition: transform .38s cubic-bezier(.22,1,.36,1); }
+#counter-sheet.open { transform: translateY(0) !important; }
+#sheet-backdrop { transition: opacity .3s ease; }
+
+/* Header hide-on-scroll-down / show-on-up */
+#app-header { transition: transform .35s cubic-bezier(.22,1,.36,1); }
+#app-header.hidden-header { transform: translateY(-110%); }
+
+/* Balance privacy flip */
+.flip-num { display: inline-block; transition: transform .3s ease, opacity .3s ease; }
+.flip-num.flipping { transform: rotateX(90deg); opacity: 0; }
+
+/* Badge carousel drag */
+.badge-track { scroll-snap-type: x mandatory; }
+.badge-track > * { scroll-snap-align: start; }
+
+/* Chat entrance */
+.chat-msg { animation: chatIn .35s cubic-bezier(.22,1,.36,1) both; }
+@keyframes chatIn { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* Typing indicator */
+.typing-dot { width: 6px; height: 6px; border-radius: 9999px; background: #6d7a72; animation: typing 1.2s infinite; }
+.typing-dot:nth-child(2) { animation-delay: .15s; }
+.typing-dot:nth-child(3) { animation-delay: .3s; }
+@keyframes typing { 0%,60%,100% { transform: translateY(0); opacity: .4; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+/* Number counter */
+.count-up { transition: none; }
+
+/* Notification unread dot pop */
+.unread-dot { animation: dotPop .4s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes dotPop { from { transform: scale(0); } to { transform: scale(1); } }
+
+/* Skeleton shimmer for images while loading */
+.img-skeleton { position: relative; background: linear-gradient(100deg, #e5eeff 40%, #f4f8ff 50%, #e5eeff 60%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* Category pill active state */
+.cat-pill { transition: all .25s cubic-bezier(.22,1,.36,1); }
+.cat-pill.active { transform: scale(1.04); }
+
+/* FAB */
+#fab { transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease; }
+#fab:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 26px rgba(0,105,72,.4); }
+#fab:active { transform: scale(.9); }
+
+/* Nav active indicator */
+.nav-item { transition: color .25s ease, transform .2s ease; position: relative; }
+.nav-item.active { color: #006948; }
+.nav-item.active .nav-ico { animation: navPop .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes navPop { 0% { transform: scale(.6); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.nav-item:not(.active):hover { color: #0b1c30; transform: translateY(-2px); }
+
+/* OTP digit pulse */
+.otp-digit { animation: otpPulse 2s ease-in-out infinite; display: inline-block; }
+.otp-digit:nth-child(2) { animation-delay: .2s; } .otp-digit:nth-child(3) { animation-delay: .4s; } .otp-digit:nth-child(4) { animation-delay: .6s; }
+@keyframes otpPulse { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+
+/* Live dot on tracking header */
+.live-dot { animation: liveDot 1.4s ease-in-out infinite; }
+@keyframes liveDot { 0%,100% { box-shadow: 0 0 0 0 rgba(0,105,72,.5); } 50% { box-shadow: 0 0 0 7px rgba(0,105,72,0); } }
+
+/* Success check draw */
+.check-draw { stroke-dasharray: 40; stroke-dashoffset: 40; animation: drawCheck .5s .1s ease forwards; }
+@keyframes drawCheck { to { stroke-dashoffset: 0; } }
+
+/* Safe areas */
+.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
