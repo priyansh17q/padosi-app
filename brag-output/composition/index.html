@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=1920, height=1080" />
-<title>Padosi Pro — Brag</title>
+<title>Padosi Pro — Brag (Extended)</title>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <style>
   @font-face { font-family:'Plus Jakarta Sans'; font-weight:400; font-style:normal; src:url('assets/fonts/PlusJakartaSans-400.woff2') format('woff2'); }
@@ -21,24 +21,43 @@
 
   .card { background:#FFFFFF; border:1px solid #E1E8E3; border-radius:28px; box-shadow:0 24px 48px rgba(11,31,23,.12); }
   .pill { border-radius:9999px; display:inline-flex; align-items:center; gap:8px; }
-
   .num-tabular { font-variant-numeric: tabular-nums; }
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="padosi-brag" data-start="0" data-width="1920" data-height="1080" data-duration="20">
+<div id="root" data-composition-id="padosi-brag" data-start="0" data-width="1920" data-height="1080" data-duration="56.3">
 
-  <!-- ============ SCENE 1 — HOOK (0 - 2.5s) ============ -->
-  <section id="s1" class="clip dark-bg" data-start="0" data-duration="2.5">
+  <!-- ============ SCENE 1 — HOOK (0 - 4.412s) ============ -->
+  <section id="s1" class="clip dark-bg" data-start="0" data-duration="4.412">
     <div style="text-align:center">
-      <div id="hook1" style="font-size:108px;font-weight:800;color:#FFFFFF;letter-spacing:-2px;opacity:0">Your neighbor</div>
-      <div id="hook2" style="font-size:108px;font-weight:800;color:#8FD9B8;letter-spacing:-2px;opacity:0;margin-top:6px">is the network.</div>
+      <div id="hook1" style="font-size:88px;font-weight:800;color:#FFFFFF;letter-spacing:-1px;opacity:0">Every neighborhood already has a network.</div>
+      <div id="hook2" style="font-size:88px;font-weight:800;color:#8FD9B8;letter-spacing:-1px;opacity:0;margin-top:14px">We just built the app for it.</div>
     </div>
   </section>
 
-  <!-- ============ SCENE 2 — EXPLORE FEED (2.5 - 6.0s) ============ -->
-  <section id="s2" class="clip light-bg" data-start="2.5" data-duration="3.5">
-    <div id="s2-card" class="card" style="width:820px;padding:44px;opacity:0">
+  <!-- ============ SCENE 2 — THE PROBLEM (4.412 - 13.155s) ============ -->
+  <section id="s2" class="clip light-bg" data-start="4.412" data-duration="8.743">
+    <div style="display:flex;flex-direction:column;gap:28px;width:1200px">
+      <div id="p-row1" class="card" style="padding:32px 40px;display:flex;align-items:center;justify-content:space-between;opacity:0">
+        <span style="font-size:36px;font-weight:700;color:#0B1F17">🍔 Food delivery apps</span>
+        <span style="font-size:30px;font-weight:600;color:#B45309">Food only</span>
+      </div>
+      <div id="p-row2" class="card" style="padding:32px 40px;display:flex;align-items:center;justify-content:space-between;opacity:0">
+        <span style="font-size:36px;font-weight:700;color:#0B1F17">🛠 Professional services</span>
+        <span style="font-size:30px;font-weight:600;color:#B45309">Too pricey for a favor</span>
+      </div>
+      <div id="p-row3" style="text-align:center;opacity:0;margin-top:10px">
+        <span style="font-size:44px;font-weight:800;color:#046A4E">Nobody's built for the small stuff.</span>
+      </div>
+      <div id="p-row4" style="text-align:center;opacity:0">
+        <span style="font-size:44px;font-weight:800;color:#0B1F17">Until now.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 3 — EXPLORE FEED (13.155 - 19.914s) ============ -->
+  <section id="s3" class="clip light-bg" data-start="13.155" data-duration="6.759">
+    <div id="s3-card" class="card" style="width:820px;padding:44px;opacity:0">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
         <div style="display:flex;gap:10px">
           <span class="pill" style="background:#FEF3DC;color:#7A4A00;padding:8px 16px;font-size:22px;font-weight:700">⏱ Urgent · within 45m</span>
@@ -56,32 +75,30 @@
             <div style="font-size:19px;color:#52685C">42 tasks posted</div>
           </div>
         </div>
-        <button id="s2-btn" style="height:64px;padding:0 32px;border:none;border-radius:9999px;background:#046A4E;color:#fff;font-size:24px;font-weight:700;font-family:'Plus Jakarta Sans'">Quick Accept →</button>
+        <button id="s3-btn" style="height:64px;padding:0 32px;border:none;border-radius:9999px;background:#046A4E;color:#fff;font-size:24px;font-weight:700;font-family:'Plus Jakarta Sans'">Quick Accept →</button>
       </div>
     </div>
   </section>
 
-  <!-- ============ SCENE 3 — POST TASK / ESCROW (6.0 - 10.0s) ============ -->
-  <section id="s3" class="clip light-bg" data-start="6" data-duration="4">
-    <div id="s3-card" class="card" style="width:760px;padding:48px;opacity:0">
+  <!-- ============ SCENE 4 — POST TASK / ESCROW (19.914 - 28.230s) ============ -->
+  <section id="s4" class="clip light-bg" data-start="19.914" data-duration="8.316">
+    <div id="s4-card" class="card" style="width:760px;padding:48px;opacity:0">
       <div style="font-size:24px;font-weight:700;letter-spacing:2px;color:#046A4E;text-transform:uppercase;margin-bottom:8px">Escrow Total</div>
-      <div id="s3-amount" class="num-tabular" style="font-size:96px;font-weight:800;color:#0B1F17;margin-bottom:32px">₹0</div>
-      <button id="s3-btn" style="width:100%;height:80px;border:none;border-radius:9999px;background:#046A4E;color:#fff;font-size:28px;font-weight:700;font-family:'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center;gap:14px">
-        <span id="s3-icon" style="font-size:30px">🔒</span>
-        <span id="s3-label">Post Task with Escrow</span>
+      <div id="s4-amount" class="num-tabular" style="font-size:96px;font-weight:800;color:#0B1F17;margin-bottom:24px">₹0</div>
+      <div id="s4-sub" style="font-size:24px;color:#52685C;margin-bottom:24px;opacity:0">Locked the moment you post — released only when the OTP confirms handoff.</div>
+      <button id="s4-btn" style="width:100%;height:80px;border:none;border-radius:9999px;background:#046A4E;color:#fff;font-size:28px;font-weight:700;font-family:'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center;gap:14px">
+        <span id="s4-icon" style="font-size:30px">🔒</span>
+        <span id="s4-label">Post Task with Escrow</span>
       </button>
     </div>
   </section>
 
-  <!-- ============ SCENE 4 — LIVE TRACKING (10.0 - 14.5s) ============ -->
-  <section id="s4" class="clip" data-start="10" data-duration="4.5" style="background:linear-gradient(135deg,#dce9ff 0%,#c7ebd8 100%);display:flex;align-items:center;justify-content:center;overflow:hidden">
-    <div id="s4-wrap" style="position:relative;width:100%;height:100%;opacity:0">
-      <!-- soft map-ish texture -->
+  <!-- ============ SCENE 5 — LIVE TRACKING (28.230 - 37.201s) ============ -->
+  <section id="s5" class="clip" data-start="28.230" data-duration="8.971" style="background:linear-gradient(135deg,#dce9ff 0%,#c7ebd8 100%);display:flex;align-items:center;justify-content:center;overflow:hidden">
+    <div id="s5-wrap" style="position:relative;width:100%;height:100%;opacity:0">
       <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.5), transparent 40%), radial-gradient(circle at 70% 65%, rgba(255,255,255,.35), transparent 45%)"></div>
-
-      <div id="s4-tag" style="position:absolute;top:80px;left:80px;background:#FFFFFF;border-radius:9999px;padding:16px 28px;box-shadow:0 8px 24px rgba(11,31,23,.15);font-size:26px;font-weight:700;color:#0B1F17;opacity:0">● Live Delivery Track · Sector 4</div>
-
-      <div style="position:absolute;left:50%;top:52%;transform:translate(-50%,-50%)">
+      <div id="s5-tag" style="position:absolute;top:80px;left:80px;background:#FFFFFF;border-radius:9999px;padding:16px 28px;box-shadow:0 8px 24px rgba(11,31,23,.15);font-size:26px;font-weight:700;color:#0B1F17;opacity:0">● Live Delivery Track · Sector 4</div>
+      <div style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%)">
         <div id="ring1" style="position:absolute;left:50%;top:50%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;border:3px solid rgba(4,106,78,.5);opacity:0"></div>
         <div id="ring2" style="position:absolute;left:50%;top:50%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;border:3px solid rgba(4,106,78,.5);opacity:0"></div>
         <div id="pin" style="position:relative;width:88px;height:88px;border-radius:50%;background:#046A4E;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px rgba(11,31,23,.25)">
@@ -89,10 +106,9 @@
         </div>
         <div id="pin-label" data-layout-allow-overflow="true" style="position:absolute;top:100px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#0F2A20;color:#fff;padding:10px 18px;border-radius:10px;font-size:22px;font-weight:700">Rahul · <span id="pin-dist">400</span>m away</div>
       </div>
-
-      <div id="s4-eta" style="position:absolute;bottom:280px;left:80px;font-size:30px;font-weight:700;color:#0B1F17;background:rgba(255,255,255,.85);padding:14px 26px;border-radius:16px;opacity:0">Arriving in ~<span id="eta-min">8</span> mins</div>
-
-      <div id="s4-otp" class="card" style="position:absolute;bottom:70px;left:50%;transform:translateX(-50%);width:640px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;opacity:0">
+      <div id="s5-eta" style="position:absolute;bottom:320px;left:80px;font-size:30px;font-weight:700;color:#0B1F17;background:rgba(255,255,255,.85);padding:14px 26px;border-radius:16px;opacity:0">Arriving in ~<span id="eta-min">8</span> mins</div>
+      <div id="s5-chat" style="position:absolute;bottom:230px;right:80px;background:#FFFFFF;border-radius:20px;padding:16px 24px;box-shadow:0 8px 24px rgba(11,31,23,.12);font-size:22px;color:#0B1F17;opacity:0;max-width:420px">💬 "Got the bread &amp; milk, on my way up!"</div>
+      <div id="s5-otp" class="card" style="position:absolute;bottom:70px;left:50%;transform:translateX(-50%);width:640px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;opacity:0">
         <div>
           <div style="font-size:20px;font-weight:700;letter-spacing:2px;color:#52685C;text-transform:uppercase">Handoff Verification</div>
           <div style="font-size:22px;color:#0B1F17;margin-top:4px">Share PIN upon delivery</div>
@@ -102,109 +118,150 @@
     </div>
   </section>
 
-  <!-- ============ SCENE 5 — WALLET (14.5 - 17.5s) ============ -->
-  <section id="s5" class="clip light-bg" data-start="14.5" data-duration="3">
-    <div id="s5-card" style="width:760px;padding:48px;border-radius:28px;background:linear-gradient(135deg,#00855d,#046A4E);box-shadow:0 24px 48px rgba(11,31,23,.2);opacity:0">
+  <!-- ============ SCENE 6 — PUSH NOTIFICATIONS (37.201 - 41.940s) ============ -->
+  <section id="s6" class="clip dark-bg" data-start="37.201" data-duration="4.739">
+    <div style="width:760px">
+      <div id="s6-card" class="card" style="padding:28px 32px;display:flex;align-items:center;gap:20px;opacity:0;background:#FFFFFF">
+        <div style="width:64px;height:64px;border-radius:18px;background:#E4F3EC;display:flex;align-items:center;justify-content:center;font-size:32px">📣</div>
+        <div>
+          <div style="font-size:28px;font-weight:800;color:#0B1F17">New task nearby!</div>
+          <div style="font-size:22px;color:#52685C;margin-top:4px">Pickup — Nature's Basket · ₹220 · 0.6 km away</div>
+        </div>
+      </div>
+      <div id="s6-line" style="text-align:center;margin-top:36px;font-size:38px;font-weight:700;color:#FFFFFF;opacity:0">Every neighbor nearby gets notified<br>the second a task goes live.</div>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 7 — WALLET (41.940 - 46.615s) ============ -->
+  <section id="s7" class="clip light-bg" data-start="41.940" data-duration="4.675">
+    <div id="s7-card" style="width:760px;padding:48px;border-radius:28px;background:linear-gradient(135deg,#00855d,#046A4E);box-shadow:0 24px 48px rgba(11,31,23,.2);opacity:0">
       <div style="font-size:22px;font-weight:700;letter-spacing:2px;color:#BFE3D2;text-transform:uppercase;margin-bottom:10px">🔒 Padosi Escrow Guarded</div>
       <div style="font-size:24px;color:#BFE3D2;margin-bottom:4px">Total Balance</div>
-      <div id="s5-amount" class="num-tabular" style="font-size:88px;font-weight:800;color:#FFFFFF;margin-bottom:32px">₹4,200.00</div>
-      <button id="s5-btn" style="width:100%;height:76px;border:none;border-radius:9999px;background:#85f8c4;color:#002114;font-size:26px;font-weight:700;font-family:'Plus Jakarta Sans'">⚡ Withdraw to UPI</button>
+      <div id="s7-amount" class="num-tabular" style="font-size:88px;font-weight:800;color:#FFFFFF;margin-bottom:32px">₹4,200.00</div>
+      <button id="s7-btn" style="width:100%;height:76px;border:none;border-radius:9999px;background:#85f8c4;color:#002114;font-size:26px;font-weight:700;font-family:'Plus Jakarta Sans'">⚡ Withdraw to UPI</button>
     </div>
   </section>
 
-  <!-- ============ SCENE 6 — OUTRO (17.5 - 20.0s) ============ -->
-  <section id="s6" class="clip dark-bg" data-start="17.5" data-duration="2.5">
+  <!-- ============ SCENE 8 — TRUST (46.615 - 52.228s) ============ -->
+  <section id="s8" class="clip light-bg" data-start="46.615" data-duration="5.613">
+    <div style="display:flex;gap:32px">
+      <div id="t1" class="card" style="width:340px;padding:40px 32px;text-align:center;opacity:0">
+        <div style="font-size:52px;margin-bottom:16px">🚫🧍</div>
+        <div style="font-size:28px;font-weight:700;color:#0B1F17">No strangers</div>
+      </div>
+      <div id="t2" class="card" style="width:340px;padding:40px 32px;text-align:center;opacity:0">
+        <div style="font-size:52px;margin-bottom:16px">🚫🏬</div>
+        <div style="font-size:28px;font-weight:700;color:#0B1F17">No dark stores</div>
+      </div>
+      <div id="t3" class="card" style="width:340px;padding:40px 32px;text-align:center;background:#046A4E;opacity:0">
+        <div style="font-size:52px;margin-bottom:16px">✅</div>
+        <div style="font-size:28px;font-weight:700;color:#FFFFFF">Verified neighbors</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 9 — OUTRO (52.228 - 56.224s) ============ -->
+  <section id="s9" class="clip dark-bg" data-start="52.228" data-duration="3.996">
     <div style="text-align:center">
-      <img id="s6-logo" src="assets/images/padosi-logo.png" style="width:140px;height:140px;border-radius:32px;background:#fff;padding:20px;opacity:0;box-shadow:0 24px 48px rgba(0,0,0,.35)" />
-      <div id="s6-tag" style="font-size:52px;font-weight:800;color:#FFFFFF;margin-top:36px;opacity:0">Your neighbor is the network.</div>
-      <div id="s6-word" style="font-size:28px;font-weight:600;letter-spacing:3px;color:#8FD9B8;text-transform:uppercase;margin-top:16px;opacity:0">Padosi Pro</div>
+      <img id="s9-logo" src="assets/images/padosi-logo.png" style="width:140px;height:140px;border-radius:32px;background:#fff;padding:20px;opacity:0;box-shadow:0 24px 48px rgba(0,0,0,.35)" />
+      <div id="s9-tag" style="font-size:52px;font-weight:800;color:#FFFFFF;margin-top:36px;opacity:0">Your neighbor is the network.</div>
+      <div id="s9-word" style="font-size:28px;font-weight:600;letter-spacing:3px;color:#8FD9B8;text-transform:uppercase;margin-top:16px;opacity:0">Padosi Pro</div>
     </div>
   </section>
 
-  <!-- ============ AUDIO ============ -->
-  <audio id="bg-music" data-start="0" data-duration="20" data-track-index="10" data-volume="0.3" src="assets/music/happy-beats-business-moves-vol-11-by-ende-dot-app.mp3"></audio>
-  <audio id="sfx-drop1" data-start="1.55" data-duration="0.2" data-track-index="11" data-volume="0.7" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
-  <audio id="sfx-drop2" data-start="3.65" data-duration="0.2" data-track-index="12" data-volume="0.7" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
-  <audio id="sfx-click" data-start="4.95" data-duration="0.05" data-track-index="13" data-volume="0.7" src="assets/sfx/interface/click_002.ogg"></audio>
-  <audio id="sfx-lock" data-start="9.45" data-duration="0.2" data-track-index="14" data-volume="0.7" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
-  <audio id="sfx-ping" data-start="12.6" data-duration="0.05" data-track-index="15" data-volume="0.7" src="assets/sfx/interface/click_002.ogg"></audio>
-  <audio id="sfx-chip" data-start="16.25" data-duration="0.2" data-track-index="16" data-volume="0.7" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
-  <audio id="sfx-bell" data-start="17.95" data-duration="1.5" data-track-index="17" data-volume="0.75" src="assets/sfx/impact/impactBell_heavy_000.ogg"></audio>
+  <!-- ============ AUDIO — MUSIC ============ -->
+  <audio id="bg-music" data-start="0" data-duration="56.3" data-track-index="10" data-volume="1" src="assets/music/happy-beats-business-moves-vol-11-by-ende-dot-app.mp3"></audio>
+
+  <!-- ============ AUDIO — VOICEOVER ============ -->
+  <audio id="vo1" data-start="0.2" data-duration="3.712" data-track-index="3" data-volume="1" src="assets/voice/vo1.wav"></audio>
+  <audio id="vo2" data-start="4.612" data-duration="8.043" data-track-index="3" data-volume="1" src="assets/voice/vo2.wav"></audio>
+  <audio id="vo3" data-start="13.355" data-duration="6.059" data-track-index="3" data-volume="1" src="assets/voice/vo3.wav"></audio>
+  <audio id="vo4" data-start="20.114" data-duration="7.616" data-track-index="3" data-volume="1" src="assets/voice/vo4.wav"></audio>
+  <audio id="vo5" data-start="28.430" data-duration="8.171" data-track-index="3" data-volume="1" src="assets/voice/vo5.wav"></audio>
+  <audio id="vo6" data-start="37.401" data-duration="4.139" data-track-index="3" data-volume="1" src="assets/voice/vo6.wav"></audio>
+  <audio id="vo7" data-start="42.140" data-duration="4.075" data-track-index="3" data-volume="1" src="assets/voice/vo7.wav"></audio>
+  <audio id="vo8" data-start="46.815" data-duration="5.013" data-track-index="3" data-volume="1" src="assets/voice/vo8.wav"></audio>
+  <audio id="vo9" data-start="52.528" data-duration="2.496" data-track-index="3" data-volume="1" src="assets/voice/vo9.wav"></audio>
+
+  <!-- ============ AUDIO — SFX ============ -->
+  <audio id="sfx1" data-start="2.55" data-duration="0.2" data-track-index="11" data-volume="0.6" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+  <audio id="sfx2" data-start="4.9" data-duration="0.05" data-track-index="12" data-volume="0.6" src="assets/sfx/interface/click_002.ogg"></audio>
+  <audio id="sfx3" data-start="9.9" data-duration="0.05" data-track-index="13" data-volume="0.6" src="assets/sfx/interface/click_002.ogg"></audio>
+  <audio id="sfx4" data-start="13.55" data-duration="0.2" data-track-index="14" data-volume="0.65" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+  <audio id="sfx5" data-start="17.6" data-duration="0.05" data-track-index="15" data-volume="0.65" src="assets/sfx/interface/click_002.ogg"></audio>
+  <audio id="sfx6" data-start="26.6" data-duration="0.2" data-track-index="16" data-volume="0.7" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+  <audio id="sfx7" data-start="32.7" data-duration="0.05" data-track-index="17" data-volume="0.6" src="assets/sfx/interface/click_002.ogg"></audio>
+  <audio id="sfx8" data-start="37.6" data-duration="0.2" data-track-index="18" data-volume="0.6" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+  <audio id="sfx9" data-start="44.4" data-duration="0.2" data-track-index="19" data-volume="0.65" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+  <audio id="sfx10" data-start="52.4" data-duration="1.5" data-track-index="20" data-volume="0.75" src="assets/sfx/impact/impactBell_heavy_000.ogg"></audio>
 </div>
 
 <script>
   const tl = gsap.timeline({ paused: true });
+  function currency(n) { return '₹' + n.toLocaleString('en-IN', { minimumFractionDigits: n % 1 !== 0 ? 2 : 0, maximumFractionDigits: 2 }); }
 
-  function currency(n) {
-    return '₹' + n.toLocaleString('en-IN', { minimumFractionDigits: n % 1 !== 0 ? 2 : 0, maximumFractionDigits: 2 });
-  }
+  // ---------- Scene 1: Hook (0 - 4.412) ---------- vo1: "Every neighborhood already has a network." / "We just built the app for it."
+  tl.fromTo('#hook1', { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 0.2);
+  tl.fromTo('#hook2', { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 2.4); // beat-locked near sentence 2 onset
 
-  // ---------- Scene 1: Hook (0 - 2.5) ---------- // beat-locked: 1.60s (hook2 lands)
-  tl.fromTo('#hook1', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 0.15);
-  tl.fromTo('#hook2', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 1.2); // lands 1.60
+  // ---------- Scene 2: The Problem (4.412 - 13.155) ---------- vo2 sentence beats
+  tl.fromTo('#p-row1', { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 4.6);
+  tl.fromTo('#p-row2', { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 6.6); // sentence 2 onset ~6.0
+  tl.fromTo('#p-row3', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 9.9); // sentence 3 onset
+  tl.fromTo('#p-row4', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(1.6)' }, 12.3);
 
-  // ---------- Scene 2: Explore feed (2.5 - 6.0) ---------- // beat-locked: 3.70s (card reveal)
-  tl.fromTo('#s2-card', { y: 30, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' }, 3.25); // lands 3.70
-  // simulated tap on Quick Accept
-  tl.to('#s2-btn', { scale: 0.94, duration: 0.12, ease: 'power1.inOut' }, 4.95)
-    .to('#s2-btn', { scale: 1, duration: 0.15, ease: 'back.out(2)' }, 5.07)
-    .call(() => {
-      const b = document.getElementById('s2-btn');
-      b.textContent = '✓ Claimed';
-      b.style.background = '#00855d';
-    }, [], 5.0);
+  // ---------- Scene 3: Explore feed (13.155 - 19.914) ---------- vo3
+  tl.fromTo('#s3-card', { y: 30, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' }, 13.4);
+  tl.to('#s3-btn', { scale: 0.94, duration: 0.12 }, 17.55)
+    .to('#s3-btn', { scale: 1, duration: 0.15, ease: 'back.out(2)' }, 17.67)
+    .call(() => { const b = document.getElementById('s3-btn'); b.textContent = '✓ Claimed'; b.style.background = '#00855d'; }, [], 17.6);
 
-  // ---------- Scene 3: Post Task / Escrow (6.0 - 10.0) ---------- // beat-locked: 9.50s (escrow confirmed)
-  tl.fromTo('#s3-card', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 6.15);
-  const s3amt = document.getElementById('s3-amount');
-  tl.to({ v: 0 }, {
-    v: 210, duration: 0.9, ease: 'power2.out',
-    onUpdate: function () { s3amt.textContent = currency(Math.round(this.targets()[0].v)); }
-  }, 6.7);
-  tl.to('#s3-icon', { rotation: 360, duration: 0.55, repeat: 1, ease: 'linear' }, 8.9)
-    .call(() => {
-      document.getElementById('s3-label').textContent = 'Locking Escrow…';
-    }, [], 8.9)
-    .call(() => {
-      const btn = document.getElementById('s3-btn');
-      document.getElementById('s3-icon').textContent = '✓';
-      document.getElementById('s3-label').textContent = 'Escrow Locked';
-      btn.style.background = '#00855d';
-    }, [], 9.5); // lands 9.50
+  // ---------- Scene 4: Post Task / Escrow (19.914 - 28.230) ---------- vo4
+  tl.fromTo('#s4-card', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 20.05);
+  const s4amt = document.getElementById('s4-amount');
+  tl.to({ v: 0 }, { v: 210, duration: 1.0, ease: 'power2.out', onUpdate: function () { s4amt.textContent = currency(Math.round(this.targets()[0].v)); } }, 20.4);
+  tl.fromTo('#s4-sub', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 23.3); // sentence 2 onset
+  tl.to('#s4-icon', { rotation: 360, duration: 0.55, repeat: 1, ease: 'linear' }, 26.5)
+    .call(() => { document.getElementById('s4-label').textContent = 'Locking Escrow…'; }, [], 26.5)
+    .call(() => { const btn = document.getElementById('s4-btn'); document.getElementById('s4-icon').textContent = '✓'; document.getElementById('s4-label').textContent = 'Escrow Locked'; btn.style.background = '#00855d'; }, [], 27.5);
 
-  // ---------- Scene 4: Live Tracking (10.0 - 14.5) ---------- // beat-locked: 12.65s (OTP card)
-  tl.fromTo('#s4-wrap', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.1);
-  tl.fromTo('#s4-tag', { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 }, 10.5);
-  // radar pulses — finite repeats, staggered rings
-  tl.fromTo('#ring1', { scale: 0.3, opacity: 0.9 }, { scale: 2.6, opacity: 0, duration: 1.1, repeat: 2, ease: 'power1.out' }, 10.5);
-  tl.fromTo('#ring2', { scale: 0.3, opacity: 0.9 }, { scale: 2.6, opacity: 0, duration: 1.1, repeat: 2, ease: 'power1.out' }, 11.1);
-  // runner pin gentle bounce — finite repeat
-  tl.to('#pin', { y: -10, duration: 0.55, repeat: 5, yoyo: true, ease: 'sine.inOut' }, 10.5);
-  tl.fromTo('#s4-eta', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 }, 10.9);
-  // ETA + distance ticking down
-  tl.call(() => { document.getElementById('eta-min').textContent = '6'; document.getElementById('pin-dist').textContent = '260'; }, [], 11.6);
-  tl.call(() => { document.getElementById('eta-min').textContent = '4'; document.getElementById('pin-dist').textContent = '120'; }, [], 13.0);
-  // OTP card — lands exactly on 12.65 cue
-  tl.fromTo('#s4-otp', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 12.25);
+  // ---------- Scene 5: Live Tracking (28.230 - 37.201) ---------- vo5
+  tl.fromTo('#s5-wrap', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 28.35);
+  tl.fromTo('#s5-tag', { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 }, 28.7);
+  tl.fromTo('#ring1', { scale: 0.3, opacity: 0.9 }, { scale: 2.6, opacity: 0, duration: 1.1, repeat: 4, ease: 'power1.out' }, 28.7);
+  tl.fromTo('#ring2', { scale: 0.3, opacity: 0.9 }, { scale: 2.6, opacity: 0, duration: 1.1, repeat: 4, ease: 'power1.out' }, 29.3);
+  tl.to('#pin', { y: -10, duration: 0.55, repeat: 9, yoyo: true, ease: 'sine.inOut' }, 28.7);
+  tl.fromTo('#s5-eta', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 }, 29.1);
+  tl.call(() => { document.getElementById('eta-min').textContent = '6'; document.getElementById('pin-dist').textContent = '280'; }, [], 30.5);
+  tl.fromTo('#s5-chat', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 }, 31.7); // vo5 sentence 2 onset region
+  tl.call(() => { document.getElementById('eta-min').textContent = '3'; document.getElementById('pin-dist').textContent = '90'; }, [], 34.5);
+  tl.fromTo('#s5-otp', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 35.9); // lands near "handoff" word
 
-  // ---------- Scene 5: Wallet (14.5 - 17.5) ----------
-  tl.fromTo('#s5-card', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 14.6);
-  const s5amt = document.getElementById('s5-amount');
-  tl.to({ v: 4200 }, {
-    v: 4850, duration: 0.8, ease: 'power2.out',
-    onUpdate: function () { s5amt.textContent = currency(this.targets()[0].v); }
-  }, 15.15);
-  tl.to('#s5-btn', { scale: 0.95, duration: 0.12 }, 16.2)
-    .to('#s5-btn', { scale: 1, duration: 0.18, ease: 'back.out(2)' }, 16.32)
-    .call(() => { document.getElementById('s5-btn').textContent = '✓ Sent to UPI'; }, [], 16.25);
+  // ---------- Scene 6: Notifications (37.201 - 41.940) ---------- vo6
+  tl.fromTo('#s6-card', { y: -24, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.4)' }, 37.5);
+  tl.fromTo('#s6-line', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 38.4);
 
-  // ---------- Scene 6: Outro (17.5 - 20.0) ----------
-  tl.fromTo('#s6-logo', { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.6)' }, 17.6);
-  tl.fromTo('#s6-tag', { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 18.1);
-  tl.fromTo('#s6-word', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 18.6);
+  // ---------- Scene 7: Wallet (41.940 - 46.615) ---------- vo7
+  tl.fromTo('#s7-card', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 42.1);
+  const s7amt = document.getElementById('s7-amount');
+  tl.to({ v: 4200 }, { v: 4850, duration: 0.9, ease: 'power2.out', onUpdate: function () { s7amt.textContent = currency(this.targets()[0].v); } }, 42.6);
+  tl.to('#s7-btn', { scale: 0.95, duration: 0.12 }, 44.4).to('#s7-btn', { scale: 1, duration: 0.18, ease: 'back.out(2)' }, 44.52)
+    .call(() => { document.getElementById('s7-btn').textContent = '✓ Sent to UPI'; }, [], 44.45);
 
-  // music fade out at the very end
-  tl.fromTo('#bg-music', { volume: 0.3 }, { volume: 0, duration: 1 }, 19.0);
+  // ---------- Scene 8: Trust (46.615 - 52.228) ---------- vo8 sentence beats
+  tl.fromTo('#t1', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'power3.out' }, 46.9);
+  tl.fromTo('#t2', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'power3.out' }, 47.9);
+  tl.fromTo('#t3', { y: 24, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.5)' }, 48.9);
+
+  // ---------- Scene 9: Outro (52.228 - 56.224) ---------- vo9
+  tl.fromTo('#s9-logo', { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.6)' }, 52.55);
+  tl.fromTo('#s9-tag', { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 52.9);
+  tl.fromTo('#s9-word', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 53.6);
+
+  // music fade in / fade out — explicit baseline so any pre-tween seek is deterministic
+  tl.set('#bg-music', { volume: 0 }, 0);
+  tl.to('#bg-music', { volume: 0.15, duration: 0.4, immediateRender: false }, 0);
+  tl.to('#bg-music', { volume: 0, duration: 1, immediateRender: false }, 55.2);
 
   window.__timelines['padosi-brag'] = tl;
 </script>
