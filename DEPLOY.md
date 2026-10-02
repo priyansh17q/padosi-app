@@ -33,7 +33,7 @@ padosi-pro/
 
 ## Step 2b: Notifications (Web Push — free, "sabke phone pe")
 
-VAPID keys `.env.example` me **pehle se generated** hain — kuch nahi karna, seedha copy ho jayenge Step 3 me. (Apni khud ki security ke liye naya set banana ho to jab Node/npm mil jaye: `npx web-push generate-vapid-keys`.)
+VAPID keys ek public + ek **private** key ka jodi hota hai. Private key secret hai — ye GitHub me kabhi nahi jaani chahiye. Apni keys banao: `npx web-push generate-vapid-keys` (ya local `backend/.env` file me jo keys already hain wahi use karo — wo file gitignored hai). Dono keys seedha Render ke Environment Variables me paste karni hain (Step 3).
 
 ⚠️ **iPhone note**: Web Push Android Chrome + Desktop browsers pe turant kaam karta hai. iPhone (Safari) pe kaam karne ke liye site ko **"Add to Home Screen"** se install karna padta hai (iOS 16.4+) — normal Safari tab me push nahi aata, ye Apple ka rule hai, humara nahi.
 
@@ -55,7 +55,7 @@ VAPID keys `.env.example` me **pehle se generated** hain — kuch nahi karna, se
 3. Root Directory: `backend` | Build: `npm install` | Start: `node server.js`
 4. **Environment Variables** add karo (`.env.example` se copy):
    - `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`
-   - `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` (pehle se `.env.example` me hain)
+   - `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` (local `backend/.env` file se copy karo — wo gitignored hai)
    - `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` (Step 2c se — optional, khaali chhod sakte ho abhi)
    - `ALLOWED_ORIGINS` = tumhara Netlify URL (jaise `https://padosi-pro.netlify.app`)
 5. **Deploy** → mila URL: `https://padosi-pro-api.onrender.com`
