@@ -95,11 +95,15 @@ create index if not exists idx_counter_task on counter_offers(task_id);
 create index if not exists idx_push_user on push_subscriptions(user_id);
 create index if not exists idx_payments_order on payments(razorpay_order_id);
 
--- Row Level Security (RLS) enable
+-- Row Level Security (RLS): SAARI tables pe ON, aur koi policy nahi.
+-- Matlab Supabase ki public (anon) key se koi bhi table padh/likh nahi sakta
+-- (otps, sessions, users ke emails sab band). Hamara backend service_role key
+-- use karta hai, jo RLS ko bypass karti hai, isliye app pe koi asar nahi padta.
 alter table users enable row level security;
+alter table otps enable row level security;
+alter table sessions enable row level security;
 alter table tasks enable row level security;
+alter table counter_offers enable row level security;
 alter table notifications enable row level security;
-
--- RLS Policies (service_role key bypass karta hai, ye sirf extra safety hai)
-create policy "public read tasks" on tasks for select using (true);
-create policy "public read users" on users for select using (true);
+alter table push_subscriptions enable row level security;
+alter table payments enable row level security;
