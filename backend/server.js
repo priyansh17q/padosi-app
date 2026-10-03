@@ -12,6 +12,9 @@ const webpush = require('web-push');
 const Razorpay = require('razorpay');
 
 const app = express();
+// Render/Netlify jaise hosts reverse proxy ke peeche chalte hain; iske bina req.ip
+// proxy ka IP hota hai aur saare users ek hi rate-limit bucket me aa jaate hain.
+app.set('trust proxy', 1);
 app.use(express.json({ limit: '100kb' }));
 
 /* ---------- Rate limiting (1000-user safety net) ---------- */
@@ -134,7 +137,12 @@ const RESEND_COOLDOWN_SEC = 60; // 60s dobara OTP
 
 /* ================= ROUTES ================= */
 
-app.get('/api/health', (req, res) => res.json({ ok: true, time: new Date() }));
+// db: 'ok' ya 'error' — deploy ke baad is link se pata chalta hai ki Supabase key/URL sahi hai ya nahi
+app.get('/api/health', async (req, res) => {
+  const { error } = await supabase.from('users').select('id').limit(1);
+  if (error) console.error('[health] database error:', error.message);
+  res.json({ ok: true, db: error ? 'error' : 'ok', time: new Date() });
+});
 
 /* ---- 1. OTP bhejo (Gmail se) ---- */
 app.post('/api/auth/request-otp', otpLimiter, async (req, res) => {
@@ -149,11 +157,15 @@ app.post('/api/auth/request-otp', otpLimiter, async (req, res) => {
       return res.status(429).json({ error: `Thoda ruko, ${RESEND_COOLDOWN_SEC}s cooldown hai` });
 
     const code = String(crypto.randomInt(100000, 999999));
-    await supabase.from('otps').upsert({
+    const { error: saveErr } = await supabase.from('otps').upsert({
       email, code, attempts: 0,
       expires_at: new Date(Date.now() + OTP_EXPIRY_MIN * 60000).toISOString(),
       created_at: new Date().toISOString()
     });
+    if (saveErr) {
+      console.error('[OTP] database me save nahi hua:', saveErr.message);
+      return res.status(500).json({ error: 'Server ka database se connection nahi ban raha, thodi der baad try karo' });
+    }
     const sent = await sendOtpEmail(email, code);
     res.json({ ok: true, message: 'OTP email bhej diya', ...(sent.dev ? { devOtp: code } : {}) });
   } catch (e) { res.status(500).json({ error: e.message }); }
