@@ -5,15 +5,22 @@ const API = {
   set token(v) { v ? localStorage.setItem('padosi_token', v) : localStorage.removeItem('padosi_token'); },
 
   async call(path, opts = {}) {
-    const res = await fetch(this.base + path, {
-      ...opts,
-      headers: {
-        'Content-Type': 'application/json',
-        ...(this.token ? { Authorization: 'Bearer ' + this.token } : {})
-      }
-    });
+    let res;
+    try {
+      res = await fetch(this.base + path, {
+        ...opts,
+        // free server so jaaye to pehli request 30-50s leti hai; usse zyada ho to ruk jao
+        signal: AbortSignal.timeout(60000),
+        headers: {
+          'Content-Type': 'application/json',
+          ...(this.token ? { Authorization: 'Bearer ' + this.token } : {})
+        }
+      });
+    } catch (e) {
+      throw new Error(e.name === 'TimeoutError' ? 'Server jawab nahi de raha, thodi der baad try karo' : 'Internet ya server se connection nahi ban raha');
+    }
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.error || 'Server error');
+    if (!res.ok) { const err = new Error(data.error || 'Server error'); err.status = res.status; throw err; }
     return data;
   },
 

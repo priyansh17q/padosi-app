@@ -1470,17 +1470,27 @@ function renderLogin() {
     </div>
   </div>`;
   let email = '';
+  const showOtpStep = () => {
+    $('#login-step1').classList.add('hidden');
+    $('#login-step2').classList.remove('hidden');
+    $('#login-email-label').textContent = email;
+    $('#login-otp').focus();
+  };
   $('#send-otp').onclick = async () => {
+    const btn = $('#send-otp');
     email = $('#login-email').value.trim().toLowerCase();
     $('#login-err').textContent = '';
+    btn.disabled = true; btn.textContent = 'OTP bhej raha hoon…'; btn.style.opacity = '.7';
     try {
       const r = await API.requestOtp(email);
-      $('#login-step1').classList.add('hidden');
-      $('#login-step2').classList.remove('hidden');
-      $('#login-email-label').textContent = email;
+      showOtpStep();
       if (r.devOtp) $('#login-otp').value = r.devOtp; // sirf development me
       toast('OTP email bhej diya!', 'mail');
-    } catch (e) { $('#login-err').textContent = e.message; }
+    } catch (e) {
+      // cooldown ka matlab: OTP abhi-abhi ja chuka hai → wahi daalne do
+      if (e.status === 429 && /cooldown/i.test(e.message)) { showOtpStep(); toast('OTP pehle hi bheja ja chuka hai, wahi daalo', 'mail'); }
+      else $('#login-err').textContent = e.message;
+    } finally { btn.disabled = false; btn.textContent = 'Send OTP'; btn.style.opacity = ''; }
   };
   $('#verify-otp').onclick = async () => {
     try {

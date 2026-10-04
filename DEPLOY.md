@@ -25,11 +25,22 @@ padosi-pro/
 2. Left menu → **SQL Editor** → New query → `backend/db.sql` ka poora content paste → **Run**
 3. **Settings → API** se `Project URL` aur `service_role` key copy kar lo
 
-## Step 2: Gmail Connector (free)
+## Step 2: OTP Mail (free) — Google Apps Script relay
 
-1. Gmail me **2-Step Verification ON** karo
-2. [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) → App password generate karo (16-letter)
-3. Ye email + password `.env` me jayega
+⚠️ **Gmail App Password (SMTP) Render FREE tier pe KAAM NAHI KARTA.** Render ne 26 Sept 2025 se free services par SMTP ports (25/465/587) band kar diye hain, to backend mail bhejte waqt chupchap atak jata hai. Isliye mail **HTTPS** se bhejte hain, ek chhoti Google Apps Script ke zariye jo tumhare apne Gmail se mail bhejti hai (free, domain nahi chahiye).
+
+1. [script.google.com](https://script.google.com/) → **New project**
+2. `backend/mail-relay.gs` ka poora code paste karo. Upar `const SECRET = '...'` me ek lamba random secret daalo (ye wahi hoga jo backend ke `MAIL_WEBHOOK_SECRET` me jayega)
+3. Upar function dropdown me **`testMail`** chuno → **Run** → Google permission maangega (**Advanced → Go to ... (unsafe)** → Allow). Tumhe test mail aani chahiye ✅
+4. **Deploy → New deployment → ⚙ Select type → Web app**
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+5. **Deploy** → **Web app URL** (`https://script.google.com/macros/s/.../exec`) copy karo. Ye Step 3 me `MAIL_WEBHOOK_URL` banega
+6. Script badalne par har baar **Deploy → Manage deployments → ✏ → New version → Deploy** karna padta hai
+
+**Limit:** free Gmail se ~100 mail/din. Zyada users hone par Resend/Brevo jaisi service + apna domain use karo.
+
+*(Gmail App Password `GMAIL_USER` / `GMAIL_APP_PASSWORD` sirf local testing ke liye ya paid hosting pe chalta hai.)*
 
 ## Step 2b: Notifications (Web Push — free, "sabke phone pe")
 
@@ -54,7 +65,8 @@ VAPID keys ek public + ek **private** key ka jodi hota hai. Private key secret h
 2. [render.com](https://render.com/) → GitHub login → **New → Web Service** → repo select
 3. Root Directory: `backend` | Build: `npm install` | Start: `node server.js`
 4. **Environment Variables** add karo (`.env.example` se copy):
-   - `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`
+   - `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`
+   - `MAIL_WEBHOOK_URL`, `MAIL_WEBHOOK_SECRET` (Step 2 se)
    - `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` (local `backend/.env` file se copy karo — wo gitignored hai)
    - `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` (Step 2c se — optional, khaali chhod sakte ho abhi)
    - `ALLOWED_ORIGINS` = tumhara Netlify URL (jaise `https://padosi-pro.netlify.app`)
@@ -78,7 +90,7 @@ VAPID keys ek public + ek **private** key ka jodi hota hai. Private key secret h
 
 ## ⚠️ Important Notes
 
-- **Development me** (`localhost`): agar Gmail env vars nahi hain, to OTP console me print hota hai aur API response me `devOtp` aata hai — frontend auto-fill kar deta hai
+- **Development me** (`localhost`): local `.env` me `ALLOW_DEV_OTP=true` rakho, to mail ke bina OTP console me print hota hai aur API response me `devOtp` aata hai — frontend auto-fill kar deta hai. **Production me ye kabhi `true` mat karna**, warna koi bhi kisi ke bhi email se login kar lega
 - **Cooldown**: 60 second me ek hi OTP bhej sakte ho (spam protection)
 - **OTP expiry**: 10 minute
 - **Max attempts**: 5 galat OTP ke baad naya OTP maango

@@ -36,12 +36,20 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
-/* ---------- Gmail Connector ---------- */
+/* ---------- OTP Mail ----------
+   Render FREE tier SMTP ports (25/465/587) band rakhta hai, isliye wahan mail HTTPS se jaati hai.
+   Priority:  1) MAIL_WEBHOOK_URL  (Google Apps Script web app — free, tumhare Gmail se bhejta hai)
+              2) Gmail SMTP        (local ya paid hosting pe chalta hai, free Render pe nahi)
+              3) Dev mode          (OTP console me + response me; sirf jab ALLOW_DEV_OTP=true) */
+const MAIL_WEBHOOK_URL = process.env.MAIL_WEBHOOK_URL || '';
+const MAIL_WEBHOOK_SECRET = process.env.MAIL_WEBHOOK_SECRET || '';
 let mailer = null;
-if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+if (!MAIL_WEBHOOK_URL && process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
   mailer = nodemailer.createTransport({
     service: 'gmail',
-    auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD.replace(/\s/g, '') }
+    auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD.replace(/\s/g, '') },
+    // port block ho to request atke nahi, jaldi fail ho
+    connectionTimeout: 10000, greetingTimeout: 10000, socketTimeout: 15000
   });
 }
 
@@ -99,23 +107,39 @@ async function broadcastNewTask(task, exceptUserId) {
 }
 
 async function sendOtpEmail(email, code) {
-  if (!mailer) {
+  if (MAIL_WEBHOOK_URL) {
+    // Apps Script POST ko redirect karta hai; fetch usse khud follow karta hai
+    const r = await fetch(MAIL_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ secret: MAIL_WEBHOOK_SECRET, to: email, code }),
+      signal: AbortSignal.timeout(20000)
+    });
+    const out = await r.json().catch(() => null);
+    if (!r.ok || !out || !out.ok) throw new Error('mail webhook: ' + ((out && out.error) || 'HTTP ' + r.status));
+    return { dev: false };
+  }
+  if (mailer) {
+    await mailer.sendMail({
+      from: `"Padosi Pro" <${process.env.GMAIL_USER}>`,
+      to: email,
+      subject: `${code} — aapka Padosi Pro login code`,
+      html: `
+        <div style="font-family:sans-serif;max-width:420px;margin:auto;border:1px solid #e5eeff;border-radius:12px;padding:24px">
+          <h2 style="color:#006948">Padosi Pro 🔐</h2>
+          <p>Aapka login OTP:</p>
+          <div style="font-size:36px;font-weight:800;letter-spacing:8px;color:#006948">${code}</div>
+          <p style="color:#6d7a72;font-size:13px">Ye code 10 minute valid hai. Kisi ko mat batayein.</p>
+        </div>`
+    });
+    return { dev: false };
+  }
+  // Dev mode me OTP response me wapas aata hai — isliye production me kabhi default ON nahi
+  if (process.env.ALLOW_DEV_OTP === 'true') {
     console.log(`[DEV] OTP for ${email} = ${code}`);
     return { dev: true };
   }
-  await mailer.sendMail({
-    from: `"Padosi Pro" <${process.env.GMAIL_USER}>`,
-    to: email,
-    subject: `${code} — aapka Padosi Pro login code`,
-    html: `
-      <div style="font-family:sans-serif;max-width:420px;margin:auto;border:1px solid #e5eeff;border-radius:12px;padding:24px">
-        <h2 style="color:#006948">Padosi Pro 🔐</h2>
-        <p>Aapka login OTP:</p>
-        <div style="font-size:36px;font-weight:800;letter-spacing:8px;color:#006948">${code}</div>
-        <p style="color:#6d7a72;font-size:13px">Ye code 10 minute valid hai. Kisi ko mat batayein.</p>
-      </div>`
-  });
-  return { dev: false };
+  throw new Error('Email service configure nahi hai (MAIL_WEBHOOK_URL ya GMAIL_* set karo)');
 }
 
 /* ---------- Auth middleware ---------- */
@@ -166,7 +190,13 @@ app.post('/api/auth/request-otp', otpLimiter, async (req, res) => {
       console.error('[OTP] database me save nahi hua:', saveErr.message);
       return res.status(500).json({ error: 'Server ka database se connection nahi ban raha, thodi der baad try karo' });
     }
-    const sent = await sendOtpEmail(email, code);
+    let sent;
+    try { sent = await sendOtpEmail(email, code); }
+    catch (mailErr) {
+      console.error('[OTP] email nahi bhej paaye:', mailErr.message);
+      await supabase.from('otps').delete().eq('email', email); // cooldown na lage, user turant dobara try kar sake
+      return res.status(502).json({ error: 'OTP email bhejne me dikkat aa rahi hai, thodi der baad try karo' });
+    }
     res.json({ ok: true, message: 'OTP email bhej diya', ...(sent.dev ? { devOtp: code } : {}) });
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
